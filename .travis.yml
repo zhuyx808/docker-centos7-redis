@@ -1,0 +1,14 @@
+sudo: required
+
+env:
+  global:
+    - DOCKER_VERSION=1.12.6
+
+services:
+  - docker
+
+script:
+  - docker build -t="zhuyx808/centos:latest" github.com/zhuyx808/centos
+  - docker build -t="zhuyx808/redis:latest" github.com/zhuyx808/docker-centos7-redis
+  - docker run -d -p 6379:6379 --name redis zhuyx808/redis:latest
+  - docker ps -a
